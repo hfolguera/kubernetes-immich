@@ -47,8 +47,8 @@ immich:
       autoLaunch: true
       autoRegister: true
       issuerUrl: "https://authentik.calfolguera.freemyip.com/application/o/immich/.well-known/openid-configuration"
-      clientId: "3BfifJYedRbpXoffpmvFShDBIBSmiS6MwYTnffAc"
-      clientSecret: "YrUPL8Dh9h8s9eFeIbCJCaN0YMvTJMw4mPJXyOkAyVpLh7cPUNSCRv5LoAbbukiOO6pHzKN0UIFPUk6BCuBeeAb4Zy6EhrZ8sq3QzeDbku4B3eoiDgxMtGVDj5NqcpPR"
+      clientId: "848n8clrAAVChXBcuBYpJx7G4H2EeFiRTQjrFOIx"
+      clientSecret: "k5Q59dKFaxFalsjF5bPN3toZhGDQ8cpVGogTzHq95sTF7qBxhnBFGP3NoXneCwrAKIOwsrs2vULndHzPDSKgN3mRKp6t6aIMbUMFMIZgfkUXsoW42uq3G0wuDljoG6Mj"
       scope: "openid email profile"
     # storageTemplate:
     #   enabled: true
