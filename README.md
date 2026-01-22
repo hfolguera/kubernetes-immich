@@ -33,7 +33,7 @@ kubectl create secret generic postgresql-secret --from-literal=username=immich -
 
 Use helm to deploy the Immich chart:
 ```
-HELM_EXPERIMENTAL_OCI=1 helm install --namespace immich immich oci://ghcr.io/immich-app/immich-charts/immich -f values.yaml --version 0.9.3
+HELM_EXPERIMENTAL_OCI=1 helm install --namespace immich immich oci://ghcr.io/immich-app/immich-charts/immich -f values.yaml --version 0.9.3 --set immich.configuration.oauth.clientSecret=<clientSecret>
 ```
 
 Check the Helm chart version at: https://github.com/immich-app/immich-charts/pkgs/container/immich-charts%2Fimmich
@@ -49,5 +49,5 @@ Modify the values.yaml with the required parameters (i.ex: update the tag parame
 
 Execute the following command to apply the updates:
 ```
-HELM_EXPERIMENTAL_OCI=1 helm upgrade immich oci://ghcr.io/immich-app/immich-charts/immich -f values.yaml --version 0.9.3 --namespace immich
+HELM_EXPERIMENTAL_OCI=1 helm upgrade immich oci://ghcr.io/immich-app/immich-charts/immich -f values.yaml --version 0.9.3 --namespace immich --set immich.configuration.oauth.clientSecret=<clientSecret>
 ```
