@@ -22,6 +22,7 @@ Deploy Immich using official Helm chart.
 
 First, create the required Persistent Volume Claim:
 ```
+kubectl create namespace immich
 kubectl apply -f immich-pvc.yaml
 ```
 
