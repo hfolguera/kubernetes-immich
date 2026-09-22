@@ -2,41 +2,32 @@
 
 ## Instalation
 
+### Create initial resources
+Create the required and common resources with:
+```
+kubectl apply -f immich-namespace.yaml
+kubectl create secret generic immich-secrets --from-literal=DB_USERNAME=postgres --from-literal=DB_PASSWORD=<PASSWORD> --from-literal=DB_DATABASE_NAME=immich -n immich
+```
+
 ### Deploy PostgreSQL
 
-Deploy PostgreSQL with PGVector extension as an Immich requirement:
-Deploy the CloudNativePG operator:
+Deploy PostgreSQL with VectorChord extension as an Immich requirement:
 ```
-helm repo add cnpg https://cloudnative-pg.github.io/charts
-helm upgrade --install cnpg  --namespace cnpg-system  --create-namespace  cnpg/cloudnative-pg
-```
-
-Deploy the PostgreSQL Cluster:
-```
-kubectl create secret generic immich-postgres-user --from-literal=username=immich --from-literal=password=<PASSWORD> -n cnpg-system
-kubectl apply -f cnpg.yaml
+kubectl apply -f postgres-pvc.yaml
+kubectl apply -f postgres-deployment.yaml
+kubectl apply -f postgres-service.yaml
 ```
 
 ### Deploy Immich
 Deploy Immich using official Helm chart.
 
-First, create the required Persistent Volume Claim:
+Use the manifests to deploy Immich:
 ```
-kubectl create namespace immich
+kubectl apply -f immich-config.yaml
 kubectl apply -f immich-pvc.yaml
+kubectl apply -f immich-deployment.yaml
+kubectl apply -f immich-service.yaml
 ```
-
-Create the credential for PostgreSQL database:
-```
-kubectl create secret generic postgresql-secret --from-literal=username=immich --from-literal=password=<PASSWORD> --from-literal=database=immich -n immich
-```
-
-Use helm to deploy the Immich chart:
-```
-HELM_EXPERIMENTAL_OCI=1 helm install --namespace immich immich oci://ghcr.io/immich-app/immich-charts/immich -f values.yaml --version 0.9.3 --set immich.configuration.oauth.clientSecret=<clientSecret>
-```
-
-Check the Helm chart version at: https://github.com/immich-app/immich-charts/pkgs/container/immich-charts%2Fimmich
 
 
 Modify the Persistent Volume Reclaim Policy to avoid deleting the data:
@@ -44,10 +35,5 @@ Modify the Persistent Volume Reclaim Policy to avoid deleting the data:
 kubectl patch pv <your-pv-name> -p '{"spec":{"persistentVolumeReclaimPolicy":"Retain"}}'
 ```
 
-## Upgrade
-Modify the values.yaml with the required parameters (i.ex: update the tag parameter with the latest Immmich version).
-
-Execute the following command to apply the updates:
-```
-HELM_EXPERIMENTAL_OCI=1 helm upgrade immich oci://ghcr.io/immich-app/immich-charts/immich -f values.yaml --version 0.9.3 --namespace immich --set immich.configuration.oauth.clientSecret=<clientSecret>
-```
+## Upgrade
+TODO
